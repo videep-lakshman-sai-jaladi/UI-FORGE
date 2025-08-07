@@ -94,14 +94,14 @@ const favoritesPanel = document.getElementById('favorites-panel');
 const favoritesCount = document.querySelector('.favorites-count');
 const favoritesList = document.getElementById('favorites-list');
 
-// Initialize the app
+
 document.addEventListener('DOMContentLoaded', function() {
   generateQuote();
   updateFavoritesCount();
   updateFavoritesList();
 });
 
-// Generate a new quote
+
 function generateQuote() {
   // Add loading state
   const quoteBox = document.getElementById('quote-box');
@@ -118,17 +118,17 @@ function generateQuote() {
     
     currentQuote = randomQuote;
     
-    // Update UI
+
     quoteElement.textContent = currentQuote.text;
     authorElement.textContent = `— ${currentQuote.author}`;
     
-    // Update save button state
+
     updateSaveButtonState();
     
-    // Remove loading state
+
     quoteBox.classList.remove('loading');
     
-    // Add entrance animation
+
     quoteBox.style.transform = 'translateY(10px)';
     quoteBox.style.opacity = '0';
     setTimeout(() => {
@@ -138,32 +138,31 @@ function generateQuote() {
   }, 500);
 }
 
-// Toggle save/unsave quote
+
 function toggleSaveQuote() {
   if (!currentQuote) return;
   
   const isCurrentlySaved = favorites.some(fav => fav.id === currentQuote.id);
   
   if (isCurrentlySaved) {
-    // Remove from favorites
+
     favorites = favorites.filter(fav => fav.id !== currentQuote.id);
     showNotification('Quote removed from favorites!', 'info');
   } else {
-    // Add to favorites
+
     favorites.push(currentQuote);
     showNotification('Quote saved to favorites!', 'success');
   }
   
-  // Save to localStorage
+
   localStorage.setItem('favoriteQuotes', JSON.stringify(favorites));
   
-  // Update UI
+
   updateSaveButtonState();
   updateFavoritesCount();
   updateFavoritesList();
 }
 
-// Update save button state
 function updateSaveButtonState() {
   if (!currentQuote) return;
   
@@ -177,24 +176,23 @@ function updateSaveButtonState() {
   }
 }
 
-// Toggle favorites panel
+
 function toggleFavorites() {
   const panel = document.getElementById('favorites-panel');
   panel.classList.toggle('open');
-  
-  // Update favorites list when opening
+ 
   if (panel.classList.contains('open')) {
     updateFavoritesList();
   }
 }
 
-// Update favorites count
+
 function updateFavoritesCount() {
   const countElement = document.querySelector('.favorites-count');
   countElement.textContent = favorites.length;
 }
 
-// Update favorites list
+
 function updateFavoritesList() {
   const listElement = document.getElementById('favorites-list');
   
@@ -212,7 +210,7 @@ function updateFavoritesList() {
   `).join('');
 }
 
-// Remove quote from favorites
+
 function removeFavorite(quoteId) {
   favorites = favorites.filter(fav => fav.id !== quoteId);
   localStorage.setItem('favoriteQuotes', JSON.stringify(favorites));
@@ -225,7 +223,7 @@ function removeFavorite(quoteId) {
 }
 
 
-// Share quote functionality
+
 function shareQuote() {
   if (!currentQuote) return;
   
@@ -242,7 +240,7 @@ function shareQuote() {
       showNotification('Quote copied to clipboard!', 'success');
     });
   } else {
-    // Fallback for older browsers
+
     const textArea = document.createElement('textarea');
     textArea.value = shareText;
     document.body.appendChild(textArea);
@@ -253,9 +251,9 @@ function shareQuote() {
   }
 }
 
-// Show notification
+
 function showNotification(message, type = 'info') {
-  // Remove existing notifications
+  
   const existing = document.querySelector('.notification');
   if (existing) {
     existing.remove();
@@ -265,7 +263,7 @@ function showNotification(message, type = 'info') {
   notification.className = `notification ${type}`;
   notification.textContent = message;
   
-  // Add styles
+
   Object.assign(notification.style, {
     position: 'fixed',
     top: '100px',
@@ -284,12 +282,12 @@ function showNotification(message, type = 'info') {
   
   document.body.appendChild(notification);
   
-  // Animate in
+
   setTimeout(() => {
     notification.style.transform = 'translateX(0)';
   }, 100);
   
-  // Remove after delay
+
   setTimeout(() => {
     notification.style.transform = 'translateX(100%)';
     setTimeout(() => {
@@ -298,7 +296,7 @@ function showNotification(message, type = 'info') {
   }, 3000);
 }
 
-// About modal
+
 function showAbout() {
   const aboutContent = `
     <div style="text-align: center; max-width: 500px;">
@@ -315,7 +313,7 @@ function showAbout() {
   showModal(aboutContent);
 }
 
-// Contact modal
+
 function showContact() {
   const contactContent = `
     <div style="text-align: center; max-width: 500px;">
@@ -336,9 +334,9 @@ function showContact() {
   showModal(contactContent);
 }
 
-// Generic modal function
+
 function showModal(content) {
-  // Remove existing modal
+
   const existingModal = document.querySelector('.modal-overlay');
   if (existingModal) {
     existingModal.remove();
@@ -353,7 +351,7 @@ function showModal(content) {
     </div>
   `;
   
-  // Add styles
+
   const styles = `
     .modal-overlay {
       position: fixed;
@@ -409,8 +407,7 @@ function showModal(content) {
       }
     }
   `;
-  
-  // Add styles to head if not already added
+
   if (!document.querySelector('#modal-styles')) {
     const styleSheet = document.createElement('style');
     styleSheet.id = 'modal-styles';
@@ -427,7 +424,7 @@ function showModal(content) {
     }
   });
   
-  // Close on Escape key
+
   const escapeHandler = (e) => {
     if (e.key === 'Escape') {
       closeModal();
@@ -437,7 +434,7 @@ function showModal(content) {
   document.addEventListener('keydown', escapeHandler);
 }
 
-// Close modal
+
 function closeModal() {
   const modal = document.querySelector('.modal-overlay');
   if (modal) {
@@ -445,34 +442,31 @@ function closeModal() {
   }
 }
 
-// Keyboard shortcuts
+
 document.addEventListener('keydown', (e) => {
-  // Space or Enter for new quote
+
   if (e.code === 'Space' || e.code === 'Enter') {
     e.preventDefault();
     generateQuote();
   }
-  
-  // 'S' key to save/unsave quote
+
   if (e.key.toLowerCase() === 's' && !e.ctrlKey && !e.metaKey) {
     e.preventDefault();
     toggleSaveQuote();
   }
   
-  // 'F' key to toggle favorites
+
   if (e.key.toLowerCase() === 'f' && !e.ctrlKey && !e.metaKey) {
     e.preventDefault();
     toggleFavorites();
   }
-  
-  // 'C' key to share/copy quote
+
   if (e.key.toLowerCase() === 'c' && !e.ctrlKey && !e.metaKey) {
     e.preventDefault();
     shareQuote();
   }
 });
 
-// Add touch gestures for mobile
 let touchStartX = 0;
 let touchEndX = 0;
 
@@ -491,11 +485,11 @@ function handleSwipe() {
   
   if (Math.abs(difference) > swipeThreshold) {
     if (difference > 0) {
-      // Swipe left - next quote
+
       generateQuote();
     } else {
-      // Swipe right - toggle favorites
       toggleFavorites();
     }
   }
+
 }
