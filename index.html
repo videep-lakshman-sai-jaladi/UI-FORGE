@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Dose of Wisdom - Quote Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-container">
+      <h1 class="nav-title">
+        <span class="wisdom-icon"></span>
+        Daily Dose of Wisdom
+      </h1>
+      <button class="favorites-toggle" onclick="toggleFavorites()">
+        <span>Favourites</span>
+        <span class="favorites-count">0</span>
+      </button>
+    </div>
+  </nav>
+
+
+  <div class="content">
+
+    <div class="favorites-panel" id="favorites-panel">
+      <div class="favorites-header">
+        <h3>Your Favorite Quotes</h3>
+        <button class="close-favorites" onclick="toggleFavorites()">✕</button>
+      </div>
+      <div class="favorites-list" id="favorites-list">
+        <p class="empty-favorites">No favorite quotes yet. Save some quotes to see them here!</p>
+      </div>
+    </div>
+
+
+    <main class="main-container">
+      <div class="quote-box" id="quote-box">
+        <div class="quote-content">
+          <div class="quote" id="quote">
+            "The only way to do great work is to love what you do."
+          </div>
+          <div class="author" id="author">— Steve Jobs</div>
+        </div>
+        
+        <div class="buttons">
+          <button class="btn btn-primary" id="new-quote" onclick="generateQuote()">
+            <span class="btn-icon"></span>
+            New Quote
+          </button>
+          <button class="btn btn-secondary" id="save-quote" onclick="toggleSaveQuote()">
+            Save Quote
+          </button>
+        </div>
+      </div>
+      </div>
+    </main>
+  </div>
+
+  <footer id="footer">
+    <div class="footer-content">
+      <p style="color: black;">&copy; 2025 Daily Dose of Wisdom. Inspiring minds, one quote at a time.</p>
+      <div class="footer-links">
+        <a href="#" onclick="showAbout()" style="color: black;">About</a>
+        <a href="#" onclick="showContact()" style="color: black;">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
