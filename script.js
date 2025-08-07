@@ -89,7 +89,6 @@ let favorites = JSON.parse(localStorage.getItem('favoriteQuotes') || '[]');
 const quoteElement = document.getElementById('quote');
 const authorElement = document.getElementById('author');
 const newQuoteBtn = document.getElementById('new-quote');
-const heartIcon = document.getElementById('heart');
 const saveQuoteBtn = document.getElementById('save-quote');
 const favoritesPanel = document.getElementById('favorites-panel');
 const favoritesCount = document.querySelector('.favorites-count');
@@ -104,14 +103,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function generateQuote() {
-  // Add loading state
+ 
   const quoteBox = document.getElementById('quote-box');
   quoteBox.classList.add('loading');
   
   setTimeout(() => {
     let filteredQuotes = quotes;
     
-    // Get random quote (avoid repeating the same quote)
+
     let randomQuote;
     do {
       randomQuote = filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)];
@@ -169,16 +168,13 @@ function updateSaveButtonState() {
   
   const isCurrentlySaved = favorites.some(fav => fav.id === currentQuote.id);
   const saveBtn = document.getElementById('save-quote');
-  const heartIcon = document.getElementById('heart');
   
   if (isCurrentlySaved) {
     saveBtn.classList.add('saved');
-    saveBtn.innerHTML = '<span class="heart filled">❤</span> Saved';
-    heartIcon.classList.add('filled');
+    
   } else {
     saveBtn.classList.remove('saved');
-    saveBtn.innerHTML = '<span class="heart">♡</span> Save Quote';
-    heartIcon.classList.remove('filled');
+    
   }
 }
 
@@ -499,4 +495,5 @@ function handleSwipe() {
   }
 
 }
+
 
